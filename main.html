@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> :: 여행상자 :: </title>
+		<link rel="stylesheet" href="./css/css.css" type="text/css">
+		<link href="./css/glDatePicker.flatwhite.css" rel="stylesheet" type="text/css">
+		<link href="./css/timedropper.min.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+	<div id="wrap">
+		<div id="topBar">
+			<div id="topMenu">
+				<span id="logo">여행상자</span>
+				<ul id="navigation">
+					<li id="shareBt" class="highlight">★공유</li>
+					<li id="recommendListBt">추천 여행지</li>
+					<li id="myTourBoxBt">내 여행상자</li>
+					<li id="logoutBt">로그아웃</li>
+				</ul>
+			</div>
+		</div>
+		<div id="contentArea">
+			<div id="caLeft">
+				<div id="calendarArea" class="contentBox"><div id="datePicker"></div></div>
+				<div id="infoArea" class="contentBox">
+					<ul>
+						<li><span>여행 제목</span><span><!--신나는 여행--></span></li>
+						<li><span>여행 기간</span><span><!--2016.09.19 ~ 2016.09.20--></span></li>
+						<li><span>참가자</span><span><!--지영, 창신, 대희, 평평, 부현--></span></li>
+						<li><span>총 경비</span><span><!--\50,000--></span></li>
+					</ul>
+				</div>
+				<!-- <div id="logArea" class="contentBox">
+					<div id="logTitle">로그</div>
+					<div id="logContent"></div>
+				</div> -->
+			</div>
+			<div id="caMid">
+				<div id="tourBox">
+					<div id="tourBoxTop">
+						<div id="tourBoxTitle">여행상자</div>
+					</div>
+					<div id="tourBoxContent">
+<!-- 						<div class="tour block"><div class="blockTitle btBottom">[경주] 안압지 <span class="tourTime">09:00~18:00</span></div></div><div class="down" id = "tempDownArrow"></div> -->
+						<div class="empty block"></div><div class="down"></div>
+					</div>
+				</div>
+				<div id="tourBoxPrintBar">
+					<span id="print">인쇄하기</span>
+				</div>
+			</div>
+			<div id="caRight">
+				<ul id="destination" class="list"></ul>						
+				<ul id="place" class="list"></ul>
+				<div id="registerPlace">새 여행지 등록</div>
+				<div id="placeList"></div>
+			</div>
+		</div>
+	</div>	
+	<div id="blackPanel"></div><div id="loading"></div>
+	<div id="loginM" class="modalWindow">
+		<div class="modalTop logo_w"></div>
+			<div id="inputArea">
+				<form>
+					<div>아이디</div><input type="text" name="id">
+					<div>비밀번호</div><input type="password" name="password">
+					<div><span id="loginBt" class="bt mr10">로그인</span><span id="joinBt" class="bt">회원가입</span></div>
+				</form>
+			</div>
+	</div>
+	<div id="joinM" class="modalWindow">
+		<div class="modalTop logo_w"></div>
+			<div id="inputArea">
+				<form>
+					<div>아이디</div><input type="text" name="id">
+					<div>이름</div><input type="text" name="name">
+					<div>비밀번호</div><input type="password" name="password">
+					<div>
+						<span id="joinCommit" class="bt mr10">회원가입</span>
+						<span id="joinCancel" class="bt mr10">로그인</span>
+					</div>
+				</form>
+			</div>
+	</div>
+	<div id="joinedTourBoxListM" class="modalWindow">
+		<span class="cancel"></span>
+		<div class="modalTop logo_y"></div>
+		<div class="tourBoxList" id="joinedTourBoxList">
+<!-- 			<div class="empty block"></div>
+			<div class="empty block"></div> -->
+		</div>
+		<div id="joinedTourBoxListSelect">
+			<span id="jCreateTourBoxBt" class="bt mr10">새 여행상자</span><span id="joinTourBoxBt" class="bt">여행상자 참여</span>
+		</div>
+	</div>
+	<div id="createTourBoxM" class="modalWindow">
+			<span class="cancel"></span>
+			<div class="modalTitle">새 여행상자</div>
+			<div id="inputArea">
+				<form>
+					<div>여행 제목</div><input type="text" name="boxName">
+					<div>비밀번호</div><input type="password" name="boxPassword">
+					<div><span id="cCreateTourBoxBt"class="bt">새 여행 시작하기</span></div>
+				</form>
+			</div>
+	</div>
+	<div id="joinTourBoxM" class="modalWindow">
+		<span class="cancel"></span>
+		<div class="modalTitle">"오리 고기를 먹자" (여행상자 제목)</div>
+			<div id="inputArea">
+				<form>
+					<div>비밀번호</div><input name="tourBoxPw" type="password">
+					<div><span class="bt">여행상자 참여하기</span></div>
+				</form>
+			</div>
+	</div>
+	<div id="placeInfoM" class="modalWindow">
+			<span class="cancel"></span>
+			<div class="place block"><div class="blockTitle btBottom btCenter">[경주] 안압지</div></div>
+			<div id="placeCounter"><span id="pRecommend" class="highlight">0</span>명의 여행자가 추천하고 <span id="pTourBox" class="highlight">0</span>번 여행된 장소입니다.</div>
+			<div id="placeCommentArea">
+				<form><input type="text" name="content" placeholder="댓글을 입력하세요."><span id="placeCommentWriteBt" class="bt">작성</span></form>
+				<div id="placeCommentList"></div>
+			</div>
+			<div id="placeBtList"><span id="recommendBt" class="bt">추천하기</span><span id="showTourBlockMBt" class="bt">여행하기</span></div>
+	</div>
+	<div id="setTourBlockM" class="modalWindow">
+			<span class="cancel"></span>
+			<div class="modalTitle">-</div>
+			<div class="place block"><div class="blockTitle btBottom"><span class="tourTitle">[경주] 안압지</span><span class="tourTime" id="placeTourDate">2016/11/16</span></div></div>
+			<div id="setTourBlock">
+				<form>
+					<div><span class="tourPeriod highlight2">여행 시간</span><span><input name="stime" class="blockTime"></span><span class="timeWiggle"> ~ </span><span><input name="etime" class="blockTime"></span></div>
+					<div><span class="tourPeriod highlight2">여행 경비</span><span><input name="cost" class="blockCost"></span></div>
+					<div><span class="tourPeriod highlight2">여행 메모</span><span><textarea name="memo"></textarea></span></div>
+				</form>	
+				<span class="bt" id="addTourBlockBt">여행하기</span>
+				<span class="bt" id="updateTourBlockBt">변경하기</span>
+				<span class="bt" id="deleteTourBlockBt">삭제하기</span>
+			</div>
+	</div>
+	<div id="errorM" class="modalWindow">
+		<div class="modalTitle"></div>
+		<span id="errorOk" class="bt">확인</span>
+	</div>
+	<div id="confirmM" class="modalWindow">
+		<div class="modalTitle">정말 삭제하시겠습니까?</div>
+		<span id="confirmOk" class="bt">확인</span><span id="confirmCancel" class="bt">취소</span>
+	</div>	
+	<div id="addPlaceM" class="modalWindow">
+		<span class="cancel"></span>
+		<div class="modalTitle">새 여행지 등록</div>
+		<div id="inputArea">
+			<form>
+				<div>카테고리</div>
+				<select name="localName"><option>지역명</option></select><select name="category"><option>카테고리</option></select>
+				<div>여행지 이름</div><input type="text" name="placeName" class="placeName">
+				<div>여행지 주소</div><input type="text" name="placeAddress" class="placeAddress">
+				<div>사진 URL</div><input type="text" name="placeImageUrl" class="placeImageUrl">
+				<span class="bt" id="registerPlaceBt">등록하기</span>
+			</form>
+		</div>
+		<div id="mapCanvas"><img src='http://maps.google.com/maps/api/staticmap?center=&zoom=5&size=600x300&markers=icon:http://www.iegate.net/maps/images/ruby_point.png|,&sensor=false'></div>
+	</div>
+	<div id="recommendPlaceListM" class="modalWindow">
+		<span class="cancel"></span>
+		<div class="modalTitle"><span id="selectedPlace" class="highlight">-</span> 여행지와 가까운 추천 명소입니다.</div>
+		<div id="recPlaceList">
+		</div>
+	</div>
+	<div id="allTourBoxListM" class="modalWindow">
+		<span class="cancel"></span>
+		<div class="modalTop logo_y"></div>
+		<div class="modalTitle">여행상자를 선택하세요.</div>
+		<div class="searchTourBox"><input type="text" placeholder="여행상자 제목을 입력하세요."><span id="placeCommentWriteBt" class="bt">검색</span>
+		<ul class="list" id="allTourBoxSelectList"></ul>
+		</div>
+		<div id="allTourBoxList" class="tourBoxList"></div>
+	</div>
+	<div id="sharedTourBoxListM" class="modalWindow">	
+		<span class="cancel"></span>
+		<div class="modalTop logo_y"><span id="print100"></span></div>
+		<div class="modalTitle">여행상자를 선택하세요.</div>
+		<div class="searchTourBox"><input type="text" placeholder="여행상자 제목을 입력하세요."><span id="placeCommentWriteBt" class="bt">검색</span>
+		<ul class="list" id="sharedList"></ul>
+		</div>
+		<div id="sharedTourBoxList" class="tourBoxList">
+		</div>	
+	</div>
+	<div id="tourBoxPrintM" class="modalWindow">
+		<span class="cancel"></span>
+		<div class="modalTop print"><span id="summaryPrint"></span></div>
+		<div id="printArea">
+			<!-- <div class="modalTitle tourName">오리고기 여행</div> -->
+			<div class="daily" id="summaryFrame">
+			</div>
+		</div>
+	</div>
+	<div id="sharedBoxPreviewM" class="modalWindow">
+		<span class="cancel"></span>
+		<div class="modalTop print"><span id="sharedIcon"></span></div>
+		<div id="printArea">
+			<!-- <div class="modalTitle tourName">오리고기 여행</div> -->
+			<div class="daily" id="previewFrame">
+			</div>
+		</div>
+	</div>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyCzmYnRSpejpzDGloTnCYZdTuFaYeiMSAM"></script>   
+	<script src="./js/jquery-3.1.1.min.js"></script>
+	<script src="./js/glDatePicker.min.js"></script>
+	<script src="./js/timedropper.min.js"></script>	
+	<script src="./js/class.js"></script>
+	<script src="./js/tourBox.js"></script>
+	</body>
+</html>
